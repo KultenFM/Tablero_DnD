@@ -9,15 +9,14 @@ from database import SessionLocal
 from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 
-# 🛠️  Creamos la aplicación FastAPI
-# Motor de la aplicación
+# 🛠️  Creamos la aplicación FastAPI: Motor de la aplicación
 app = FastAPI(title="API Tablero D&D - Dungeon Master")
 
 # 🛠️ Funcion: Gestor que abre una sesión cada vez que llega una petición y la cierra al terminar
 def get_db():
     db = SessionLocal()
     try:
-        # yield permite que la función devuelva un valor y luego continúe ejecutándose después de que se haya usado ese valor.
+        # Yield permite que la función devuelva un valor y luego continúe ejecutándose después de que se haya usado ese valor.
         # En este caso, devuelve la sesión de la base de datos para que pueda ser utilizada en las rutas de FastAPI
         yield db
     finally:
@@ -28,7 +27,7 @@ def get_db():
 # 📝 RUTAS DE LA API (ENDPOINTS)
 # ==========================================
 
-# ☝️ Definimos la puerta por la cual debe entrar la información
+# ☝️ Definimos la ruta: POST para crear un nuevo monstruo
 # response_model indica que la respuesta de esta ruta será del tipo Monstruo definido en schemas.py
 # para asegurarnos de que la salida tenga el formato correcto
 @app.post("/monstruos/", response_model=schemas.Monstruo)
@@ -47,8 +46,7 @@ def crear_monstruos(monstruo: schemas.MonstruoCreate, db: Session = Depends(get_
 
 # ▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️
 
-# ☝️ Definimos la puerta por la cual debe entrar la información
-# Get indica que esta ruta responderá a solicitudes para obtener datos del servidor.
+# ☝️ Definimos la ruta: GET para obtener la información de todos los monstruos del servidor
 # response_model=list[schemas.Monstruo] indica que la respuesta de esta ruta será una lista de objetos del tipo Monstruo definido en schemas.py
 @app.get("/monstruos/", response_model=list[schemas.Monstruo])
 
@@ -62,5 +60,4 @@ def buscar_monstruos(db: Session = Depends(get_db)):
     return lista_monstruos
 
 # ▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️
-
 
