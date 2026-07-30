@@ -1,5 +1,5 @@
 """
-Esquemas para los monstruos en el juego de Dungeons & Dragons (DnD).
+Recepcionista y Guardia de los datos:
 Estos esquemas definen la estructura de los datos para los monstruos, incluyendo sus atributos, iniciativa y ataque base.
 Se utilizan para la validación de datos y la serialización/deserialización en la aplicación
 """
